@@ -20,15 +20,17 @@ pub struct Results {
 }
 
 impl Parameters {
-    fn new(Alpha: Vec<f32>, Beta:Vec<f32>, Gamma:Vec<f32>) -> Self {
+    pub fn new(Alpha: Vec<f32>, Beta:Vec<f32>, Gamma:Vec<f32>) -> Self {
         return Parameters {
             Alpha, Beta, Gamma
         }
     }
 }
 
+#[pymethods]
 impl Results {
-    fn new() -> Self {
+    #[new]
+    pub fn new() -> Self {
         return Results {
             S: Vec::new(),
             I: Vec::new(),
@@ -38,7 +40,7 @@ impl Results {
 }
 
 impl SIR {
-    fn new(S: f32, I: f32, R: f32) -> Self {
+    pub fn new(S: f32, I: f32, R: f32) -> Self {
         return SIR {
             S,
             I,
