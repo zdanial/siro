@@ -1,4 +1,4 @@
-
+use pyo3::prelude::*;
 
 pub struct Parameters {
     pub Beta: Vec<f32>,
@@ -12,10 +12,19 @@ pub struct SIR {
     pub R: f32,
 }
 
+#[pyclass]
 pub struct Results {
     pub S: Vec<f32>,
     pub I: Vec<f32>,
     pub R: Vec<f32>,
+}
+
+impl Parameters {
+    fn new(Alpha: Vec<f32>, Beta:Vec<f32>, Gamma:Vec<f32>) -> Self {
+        return Parameters {
+            Alpha, Beta, Gamma
+        }
+    }
 }
 
 impl Results {
@@ -24,6 +33,16 @@ impl Results {
             S: Vec::new(),
             I: Vec::new(),
             R: Vec::new()
+        }
+    }
+}
+
+impl SIR {
+    fn new(S: f32, I: f32, R: f32) -> Self {
+        return SIR {
+            S,
+            I,
+            R
         }
     }
 }

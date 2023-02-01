@@ -3,13 +3,15 @@ mod sir;
 
 /// Formats the sum of two numbers as string.
 #[pyfunction]
-fn sir(runtime: f32, dt: f32, (S, I, R): (f32, f32, f32), (Beta, Gamma, Alpha): (Vec<f32>, Vec<f32>, Vec<f32>)) -> PyResult<String> {
-    sir::run(
+fn sir(runtime: f32, dt: f32, (S, I, R): (f32, f32, f32), (Beta, Gamma, Alpha): (Vec<f32>, Vec<f32>, Vec<f32>)) -> PyResult<sir::Results> {
+    let initial_state = sir::SIR::new(S, I, R);
+    let params = sir::Parameters::new(Beta, Gamma, Alpha);
+    Ok(sir::run(
         runtime,
-        dt.
-        sir::SIR{S, I, R},
-        sir::Parameters(Beta, Gamma, Alpha)
-    )
+        dt,
+        initial_state,
+        params
+    ))
 }
 
 /// A Python module implemented in Rust. The name of this function must match
