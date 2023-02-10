@@ -4,15 +4,17 @@ mod sir;
 /// Formats the sum of two numbers as string.
 #[pyfunction]
 #[pyo3(name = "sir")]
-fn sir_rs(runtime: f32, dt: f32, S:f32, I:f32, R:f32, Beta:Vec<f32>, Gamma:Vec<f32>, Alpha:Vec<f32>) -> PyResult<(Vec<f32>, Vec<f32>, Vec<f32>)> {
+fn sir_rs(runtime: f64, dt: f64, S:f64, I:f64, R:f64, Beta:Vec<f64>, Gamma:Vec<f64>, Alpha:Vec<f64>) -> PyResult<(Vec<f64>, Vec<f64>, Vec<f64>)> {
+    // !println(&Beta[0], &Gamma[0])
     let initial_state = sir::SIR::new(S, I, R);
-    let params = sir::Parameters::new(Beta, Gamma, Alpha);
+    let params = sir::Parameters{Beta, Gamma, Alpha};
     let res = sir::run(
         runtime,
         dt,
         initial_state,
         params
     );
+    
     Ok((res.S, res.I, res.R))
 }
 

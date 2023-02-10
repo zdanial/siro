@@ -9,6 +9,6 @@ fn main() {
         Gamma: vec![1.0/14.0; (runtime/dt) as usize],
         Alpha: vec![0.005; (runtime/dt) as usize]
     };
-
-    println!("{:?}", sir::run(runtime, dt, initial_state, params).I);
+    let out = sir::run(runtime, dt, initial_state, params);
+    println!("{:?}", out.R);
 }
